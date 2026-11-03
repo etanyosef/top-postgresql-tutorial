@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <main>
+        <h1><%= title %></h1>
+
+        <%- include('partials/search') %>
+
+        <a href="/new">Add user</a>
+
+        <% if (locals.usernames) { %>
+            <ul>
+                <% usernames.forEach(username => { %>
+                    <li>
+                        <span><%= username.username %></span>
+                        <form action="/delete/<%= username.id %>" method="post" style="display: inline;">
+                            <button
+                                type="submit"
+                                onclick="return confirm('Delete user <%= username.username %>?');"
+                            >Delete</button>
+                        </form>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
+    </main>
+</body>
+</html>
